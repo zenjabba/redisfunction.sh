@@ -209,41 +209,41 @@ test_redis_notifications() {
     echo "Redis server: $REDIS_HOST:$REDIS_PORT"
     
     if test_redis_connection; then
-        echo "✅ Redis connection successful"
+        echo "Redis connection successful"
         
         # Test setting and checking a state
         echo "Testing notification state operations..."
         if set_notification_state "test" "hdd" "paused" 60; then
-            echo "✅ Successfully set test notification state"
+            echo "Successfully set test notification state"
             
             if check_notification_state "test" "hdd" "paused"; then
-                echo "✅ Successfully checked test notification state"
+                echo "Successfully checked test notification state"
             else
-                echo "❌ Failed to check test notification state"
+                echo "Failed to check test notification state"
             fi
             
             # Clean up test state
             delete_notification_state "test" "hdd" "paused"
-            echo "✅ Cleaned up test notification state"
+            echo "Cleaned up test notification state"
         else
-            echo "❌ Failed to set test notification state"
+            echo "Failed to set test notification state"
         fi
     else
-        echo "❌ Redis connection failed - will use flag file fallback"
+        echo "Redis connection failed - will use flag file fallback"
         
         # Test flag file fallback
         echo "Testing flag file fallback..."
         if set_notification_state "test" "hdd" "paused"; then
-            echo "✅ Successfully set test notification state (flag file)"
+            echo "Successfully set test notification state (flag file)"
             if check_notification_state "test" "hdd" "paused"; then
-                echo "✅ Successfully checked test notification state (flag file)"
+                echo "Successfully checked test notification state (flag file)"
             else
-                echo "❌ Failed to check test notification state (flag file)"
+                echo "Failed to check test notification state (flag file)"
             fi
             delete_notification_state "test" "hdd" "paused"
-            echo "✅ Cleaned up test notification state (flag file)"
+            echo "Cleaned up test notification state (flag file)"
         else
-            echo "❌ Failed to set test notification state (flag file)"
+            echo "Failed to set test notification state (flag file)"
         fi
     fi
 } 
